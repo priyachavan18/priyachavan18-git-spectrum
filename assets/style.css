@@ -1,0 +1,46 @@
+/* Main Background */
+.stApp {
+    background-color: #0F172A;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #111827;
+    border-right: 1px solid #374151;
+}
+
+/* Remove Streamlit Menu */
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+/* Buttons */
+.stButton>button {
+    width: 100%;
+    border-radius: 12px;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    height: 48px;
+    font-weight: bold;
+}
+
+.stButton>button:hover {
+    background-color: #1D4ED8;
+}
+
+/* Metric Cards */
+.metric-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
