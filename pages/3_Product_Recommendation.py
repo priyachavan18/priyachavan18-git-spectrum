@@ -4,20 +4,24 @@ import plotly.express as px
 
 from utils.load_data import load_data
 
-
+# ==================================================
+# TITLE
+# ==================================================
 
 st.title("🛍️ Product Analytics")
-st.caption("Product Performance Dashboard")
+st.caption("Product Performance & Recommendation Dashboard")
 
-# ----------------------------------------------------
+st.divider()
+
+# ==================================================
 # LOAD DATA
-# ----------------------------------------------------
+# ==================================================
 
 df = load_data()
 
-# ----------------------------------------------------
+# ==================================================
 # PRODUCT SUMMARY
-# ----------------------------------------------------
+# ==================================================
 
 product = (
     df.groupby("Description")
@@ -32,78 +36,100 @@ product = (
 
 product = product.sort_values("Revenue", ascending=False)
 
-# ----------------------------------------------------
-# KPI
-# ----------------------------------------------------
+# ==================================================
+# KPI CARDS
+# ==================================================
 
 c1, c2, c3, c4 = st.columns(4)
 
-c1.metric("Products", len(product))
-c2.metric("Revenue", f"£{product['Revenue'].sum():,.0f}")
-c3.metric("Units Sold", f"{product['Quantity'].sum():,.0f}")
-c4.metric("Top Product", product.iloc[0]["Description"])
+c1.metric("🛍 Products", f"{len(product):,}")
+c2.metric("💰 Revenue", f"£{product['Revenue'].sum():,.0f}")
+c3.metric("📦 Units Sold", f"{product['Quantity'].sum():,.0f}")
+c4.metric("🏆 Best Seller", product.iloc[0]["Description"][:20])
 
 st.divider()
 
-# ----------------------------------------------------
-# TOP PRODUCTS
-# ----------------------------------------------------
+# ==================================================
+# ROW 1
+# ==================================================
 
-fig = px.bar(
-    product.head(15),
-    x="Revenue",
-    y="Description",
-    orientation="h",
-    color="Revenue",
-    template="plotly_dark",
-    title="Top 15 Products by Revenue"
-)
+left, right = st.columns(2)
 
-fig.update_layout(yaxis={"categoryorder": "total ascending"})
+with left:
 
-st.plotly_chart(fig, use_container_width=True)
+    fig1 = px.bar(
+        product.head(10),
+        x="Revenue",
+        y="Description",
+        orientation="h",
+        color="Revenue",
+        template="plotly_dark",
+        title="Top 10 Products by Revenue",
+    )
 
-# ----------------------------------------------------
-# QUANTITY SOLD
-# ----------------------------------------------------
+    fig1.update_layout(yaxis={"categoryorder": "total ascending"})
 
-fig2 = px.bar(
-    product.head(15),
-    x="Description",
-    y="Quantity",
-    color="Quantity",
-    template="plotly_dark",
-    title="Top Products by Quantity Sold"
-)
+    st.plotly_chart(fig1, use_container_width=True)
 
-fig2.update_layout(xaxis_tickangle=-45)
+with right:
 
-st.plotly_chart(fig2, use_container_width=True)
+    fig2 = px.bar(
+        product.head(10),
+        x="Quantity",
+        y="Description",
+        orientation="h",
+        color="Quantity",
+        template="plotly_dark",
+        title="Top 10 Products by Units Sold",
+    )
 
-# ----------------------------------------------------
-# REVENUE VS ORDERS
-# ----------------------------------------------------
+    fig2.update_layout(yaxis={"categoryorder": "total ascending"})
 
-fig3 = px.scatter(
-    product,
-    x="Orders",
-    y="Revenue",
-    size="Quantity",
-    color="Revenue",
-    hover_name="Description",
-    template="plotly_dark",
-    title="Revenue vs Orders"
-)
+    st.plotly_chart(fig2, use_container_width=True)
 
-st.plotly_chart(fig3, use_container_width=True)
+# ==================================================
+# ROW 2
+# ==================================================
 
-# ----------------------------------------------------
+left, right = st.columns(2)
+
+with left:
+
+    fig3 = px.scatter(
+        product,
+        x="Orders",
+        y="Revenue",
+        size="Quantity",
+        color="Revenue",
+        hover_name="Description",
+        template="plotly_dark",
+        title="Revenue vs Orders",
+    )
+
+    st.plotly_chart(fig3, use_container_width=True)
+
+with right:
+
+    fig4 = px.pie(
+        product.head(10),
+        names="Description",
+        values="Revenue",
+        hole=0.6,
+        template="plotly_dark",
+        title="Revenue Share (Top 10)",
+    )
+
+    st.plotly_chart(fig4, use_container_width=True)
+
+st.divider()
+
+# ==================================================
 # PRODUCT SEARCH
-# ----------------------------------------------------
+# ==================================================
 
-st.subheader("🔍 Search Product")
+st.subheader("🔍 Product Search")
 
-search = st.text_input("Enter Product Name")
+search = st.text_input("Search Product")
 
 if search:
 
@@ -115,30 +141,63 @@ if search:
         )
     ]
 
-    st.dataframe(result, use_container_width=True)
+    st.dataframe(
+        result,
+        use_container_width=True,
+        hide_index=True,
+    )
 
 else:
 
-    st.dataframe(product.head(25), use_container_width=True)
-
-# ----------------------------------------------------
-# BEST PRODUCTS
-# ----------------------------------------------------
-
-st.subheader("🏆 Product Recommendations")
-
-top5 = product.head(5)
-
-for _, row in top5.iterrows():
-
-    st.success(
-        f"""
-**{row['Description']}**
-
-Revenue: £{row['Revenue']:,.2f}
-
-Units Sold: {row['Quantity']:,.0f}
-
-Orders: {row['Orders']}
-"""
+    st.dataframe(
+        product.head(20),
+        use_container_width=True,
+        hide_index=True,
     )
+
+st.divider()
+
+# ==================================================
+# EXECUTIVE INSIGHTS
+# ==================================================
+
+st.subheader("📈 Executive Insights")
+
+best = product.iloc[0]
+highest_quantity = product.sort_values("Quantity", ascending=False).iloc[0]
+highest_orders = product.sort_values("Orders", ascending=False).iloc[0]
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.success(f"""
+### 🏆 Highest Revenue
+
+**{best['Description']}**
+
+Revenue
+
+**£{best['Revenue']:,.0f}**
+""")
+
+with col2:
+    st.info(f"""
+### 📦 Most Sold
+
+**{highest_quantity['Description']}**
+
+Units Sold
+
+**{highest_quantity['Quantity']:,.0f}**
+""")
+
+with col3:
+    st.warning(f"""
+### 🛒 Most Ordered
+
+**{highest_orders['Description']}**
+
+Orders
+
+**{highest_orders['Orders']:,.0f}**
+""")
