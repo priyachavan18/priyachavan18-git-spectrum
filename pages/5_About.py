@@ -1,232 +1,239 @@
 import streamlit as st
 
-# ---------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------
-
-
-# ---------------------------------------------------
+# ======================================================
 # TITLE
-# ---------------------------------------------------
+# ======================================================
 
-st.title("ℹ️ About Spectrum Retail Intelligence Platform")
+st.title("ℹ️ About Shopper Spectrum")
+st.caption("Retail Intelligence & Customer Analytics Platform")
+
+st.divider()
+
+# ======================================================
+# HERO
+# ======================================================
 
 st.markdown("""
-Welcome to the **Spectrum Retail Intelligence Platform**, an end-to-end business intelligence application developed to transform raw retail transaction data into meaningful business insights through interactive dashboards and advanced analytics.
+## 🛒 Shopper Spectrum
+
+An enterprise-style Retail Intelligence Platform designed to transform raw retail transactions into meaningful business insights using Business Intelligence, Customer Analytics, Interactive Dashboards and Machine Learning.
 """)
 
 st.divider()
 
-# ---------------------------------------------------
+# ======================================================
 # PROJECT OVERVIEW
-# ---------------------------------------------------
+# ======================================================
 
 st.header("📌 Project Overview")
 
-st.write("""
-Spectrum Retail Intelligence Platform enables organizations to analyze sales performance, customer behavior, and product trends through interactive visualizations and analytics. It demonstrates the complete data analytics workflow, from data cleaning to executive reporting.
+st.info("""
+This project demonstrates a complete Data Analytics workflow from data collection and cleaning to executive reporting.
+
+It enables organizations to:
+
+• Monitor business performance
+
+• Understand customer behaviour
+
+• Track product performance
+
+• Support strategic business decisions
+
+• Improve profitability using analytics
 """)
 
-# ---------------------------------------------------
-# KEY FEATURES
-# ---------------------------------------------------
+# ======================================================
+# PLATFORM MODULES
+# ======================================================
 
-st.header("🚀 Key Features")
+st.header("🚀 Platform Modules")
 
-col1, col2 = st.columns(2)
+c1, c2 = st.columns(2)
 
-with col1:
+with c1:
+
     st.success("""
-### 📊 Dashboard
+### 📊 Executive Dashboard
 
-- Executive KPI Dashboard
-- Revenue Analysis
-- Sales Trends
-- Country-wise Performance
-- Product Analysis
+• KPI Monitoring
+
+• Revenue Analysis
+
+• Sales Trends
+
+• Geographic Performance
 """)
 
     st.success("""
-### 👥 Customer Analytics
+### 👥 Customer Segmentation
 
-- RFM Segmentation
-- Customer Insights
-- Customer Value Analysis
-- Purchase Behaviour
+• RFM Analysis
+
+• Customer Value
+
+• Behaviour Analysis
+
+• Customer Insights
 """)
 
-with col2:
+with c2:
+
     st.success("""
 ### 🛍 Product Analytics
 
-- Best Selling Products
-- Product Revenue
-- Quantity Analysis
-- Product Search
+• Product Revenue
+
+• Quantity Analysis
+
+• Product Search
+
+• Best Sellers
 """)
 
     st.success("""
 ### 📈 Business Intelligence
 
-- Executive Insights
-- Business Recommendations
-- Trend Analysis
-- Interactive Reports
+• Executive Summary
+
+• Business Recommendations
+
+• Strategic Reporting
+
+• Trend Analysis
 """)
 
 st.divider()
 
-# ---------------------------------------------------
-# BUSINESS VALUE
-# ---------------------------------------------------
-
-st.header("💼 Business Value")
-
-st.info("""
-This application helps businesses to:
-
-• Monitor business performance in real time
-
-• Identify high-value customers
-
-• Analyze customer purchasing behaviour
-
-• Track product performance
-
-• Discover sales opportunities
-
-• Support strategic business decisions
-
-• Improve customer retention
-
-• Increase profitability through data-driven insights
-""")
-
-# ---------------------------------------------------
+# ======================================================
 # TECHNOLOGY STACK
-# ---------------------------------------------------
+# ======================================================
 
 st.header("🛠 Technology Stack")
 
-tech1, tech2, tech3 = st.columns(3)
+t1, t2, t3, t4 = st.columns(4)
 
-with tech1:
-    st.markdown("""
-### Programming
+with t1:
+    st.metric("🐍", "Python")
 
-- Python
-- SQL
-""")
+with t2:
+    st.metric("🗄", "SQL")
 
-with tech2:
-    st.markdown("""
-### Analytics
+with t3:
+    st.metric("📊", "Plotly")
 
-- Pandas
-- NumPy
-- Plotly
-- Scikit-learn
-""")
-
-with tech3:
-    st.markdown("""
-### Visualization
-
-- Streamlit
-- Plotly
-- Git
-- GitHub
-""")
+with t4:
+    st.metric("⚡", "Streamlit")
 
 st.divider()
 
-# ---------------------------------------------------
+# ======================================================
 # DATASET
-# ---------------------------------------------------
+# ======================================================
 
 st.header("📂 Dataset")
 
-st.write("""
-The project uses the **Online Retail Dataset**, which contains transactional records of a UK-based online retailer. The dataset includes customer purchases, invoice details, products, quantities, prices, countries, and transaction dates.
+st.success("""
+Dataset : Online Retail
+
+• 541,909 Transactions
+
+• 4,372 Customers
+
+• 3,684 Products
+
+• 38 Countries
 """)
 
 st.divider()
 
-# ---------------------------------------------------
-# PROJECT MODULES
-# ---------------------------------------------------
-
-st.header("📑 Project Modules")
-
-modules = [
-    "📊 Executive Dashboard",
-    "👥 Customer Segmentation",
-    "🛍 Product Analytics",
-    "📈 Business Insights",
-    "🌍 Geographic Sales Analysis",
-    "📄 Executive Reporting"
-]
-
-for module in modules:
-    st.markdown(f"✅ {module}")
-
-st.divider()
-
-# ---------------------------------------------------
-# SKILLS DEMONSTRATED
-# ---------------------------------------------------
+# ======================================================
+# SKILLS
+# ======================================================
 
 st.header("🎯 Skills Demonstrated")
 
-skills = [
-    "Data Cleaning",
-    "Exploratory Data Analysis",
-    "Business Intelligence",
-    "Data Visualization",
-    "Customer Segmentation",
-    "Interactive Dashboard Development",
-    "KPI Design",
-    "Business Analytics",
-    "Python Programming",
-    "SQL Analysis"
-]
+col1, col2 = st.columns(2)
 
-cols = st.columns(2)
+with col1:
 
-for i, skill in enumerate(skills):
-    cols[i % 2].markdown(f"✔ {skill}")
+    st.markdown("""
+✅ Data Cleaning
 
-st.divider()
+✅ Exploratory Data Analysis
 
-# ---------------------------------------------------
-# DEVELOPER
-# ---------------------------------------------------
+✅ Data Visualization
 
-st.header("👨‍💻 Developer")
+✅ KPI Development
 
-st.markdown("""
-### Priya Chavan
+✅ Business Intelligence
+""")
 
-**Aspiring Data Analyst**
+with col2:
 
-**Skills**
+    st.markdown("""
+✅ Customer Segmentation
 
-- Python
-- Excel
-- Streamlit
-- Pandas
-- NumPy
-- Plotly
+✅ Python Programming
 
-Passionate about transforming data into actionable business insights through analytics, dashboards, and machine learning.
+✅ SQL Analysis
+
+✅ Dashboard Development
+
+✅ Business Analytics
 """)
 
 st.divider()
 
-# ---------------------------------------------------
+# ======================================================
+# PROJECT WORKFLOW
+# ======================================================
+
+st.header("⚙ Analytics Workflow")
+
+st.code("""
+Retail Dataset
+      │
+      ▼
+Data Cleaning
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+Analytics
+      │
+      ▼
+Interactive Dashboard
+      │
+      ▼
+Business Intelligence
+""", language="text")
+
+st.divider()
+
+# ======================================================
+# DEVELOPER
+# ======================================================
+
+st.header("👨‍💻 Developer")
+
+st.info("""
+### Rohit Chavan
+
+Aspiring Data Analyst
+
+Python • SQL • Excel • Power BI • Streamlit • Pandas • NumPy • Plotly
+
+Passionate about building professional Business Intelligence solutions that transform raw data into actionable insights.
+""")
+
+st.divider()
+
+# ======================================================
 # FOOTER
-# ---------------------------------------------------
+# ======================================================
 
 st.caption(
-    "Spectrum Retail Intelligence Platform | Developed using Python, Streamlit and Data Analytics"
+    "© 2026 Shopper Spectrum | Retail Intelligence & Customer Analytics Platform"
 )
