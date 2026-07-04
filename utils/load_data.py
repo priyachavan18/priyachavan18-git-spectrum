@@ -1,12 +1,10 @@
 import streamlit as st
 import pandas as pd
-from pathlib import Path
 
 @st.cache_data
 def load_data():
 
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    csv_path = BASE_DIR / "data" / "online_retail.csv"
+    csv_path = r"C:\Users\Rohit chavan\OneDrive\Documents\intern projects\spectrum\online_retail.csv"
 
     df = pd.read_csv(csv_path, encoding="ISO-8859-1")
 
